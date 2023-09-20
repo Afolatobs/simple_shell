@@ -10,6 +10,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+extern char **environ;
+
 #define BUFFER_SIZE 1024
 #define MAX_PATH_LENGTH 1024
 #define MAX_ENV_VARS 100
@@ -23,7 +25,7 @@ void _exec(char **args);
 char *find_executable(char *command);
 bool fileExistsInDirectory(const char *directory, const char *command);
 char *findCommandInPath(const char *command);
-void executeEnv();
+void executeEnv(void);
 char *_getline();
 char *_strtok(char *str, const char *delim);
 void handleExitCommand(char *command);
@@ -36,7 +38,7 @@ int handleCdLogic(char *args);
 int handleCdCommand(char *command);
 int processAndExecuteCommands(char *command);
 char *trim(char *str);
-int changeDirectory(char *args);
+int changeDirectory(const char *newDir);
 ssize_t read_buffer(char *buffer, size_t size);
 char *append_char_to_line(char *line, char c, size_t *line_size);
 

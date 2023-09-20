@@ -6,9 +6,7 @@
 /**
  * executeEnv - execute the environment variable
  */
-extern char **environ;
-
-void executeEnv()
+void executeEnv(void)
 {
 char **env = environ;
 while (*env != NULL)

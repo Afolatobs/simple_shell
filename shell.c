@@ -1,29 +1,41 @@
-#include <stdio.h>
+#include "shell.h"
 
 /**
- * main - Entry point of the program
+ * main - A shell
  *
- * Description: This program prints a pattern of asterisks to the console.
- *
- * Return: Always 0 (Success)
+ * Return: 0 on success
  */
 int main(void)
 {
-int rows = 5;
-int i, j;
+	char *command;
+	char **args;
 
-for (i = 0; i < rows; i++)
-{
-for (j = 0; j < rows - i - 1; j++)
-{
-printf(" ");
-}
-for (j = 0; j < 2 * i + 1; j++)
-{
-printf("*");
-}
-printf("\n");
-}
+	while (1)
+	{
+		_prompt();
+		command = _getline();
+		if (command == NULL)
+		{
+			_printf("\n");
+			break;
+		}
 
-return (0);
+		if (handleCdCommand(command) == 0)
+		{
+			free(command);
+			continue;
+		}
+		handleShellCommands(command);
+		handleExitCommand(command);
+
+		args = tokenize(command);
+
+		if (args != NULL)
+		{
+			_exec(args);
+			free(args);
+		}
+		free(command);
+	}
+	return (0);
 }
