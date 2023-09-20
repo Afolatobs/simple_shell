@@ -1,41 +1,15 @@
-#include "shell.h"
+#include <stdio.h>
 
 /**
- * main - A shell
+ * main - Entry point
  *
- * Return: 0 on success
+ * Description: This is the main function that
+ *              prints "Hello, Betty!" to the standard output.
+ *
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
-	char *command;
-	char **args;
-
-	while (1)
-	{
-		_prompt();
-		command = _getline();
-		if (command == NULL)
-		{
-			_printf("\n");
-			break;
-		}
-
-		if (handleCdCommand(command) == 0)
-		{
-			free(command);
-			continue;
-		}
-		handleShellCommands(command);
-		handleExitCommand(command);
-
-		args = tokenize(command);
-
-		if (args != NULL)
-		{
-			_exec(args);
-			free(args);
-		}
-		free(command);
-	}
+	printf("Hello, Betty!\n");
 	return (0);
 }
