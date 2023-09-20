@@ -13,7 +13,9 @@ int main(void)
 	while (1)
 	{
 		_prompt();
+
 		command = _getline();
+
 		if (command == NULL)
 		{
 			_printf("\n");
